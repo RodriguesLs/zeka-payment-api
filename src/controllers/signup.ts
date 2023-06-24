@@ -1,6 +1,6 @@
-import instance from '../api/pagarme';
-import { IPagarmeUser } from '../interfaces/user_pagarme';
-import { IUser } from '../interfaces/user';
+import instance from '../api/pagarme.js';
+import { IPagarmeUser } from '../interfaces/user_pagarme.js';
+import { IUser } from '../interfaces/user.js';
 
 export const userCreate = async (body: IUser) => {
   const pagarmePayload = paymentBody(body)
