@@ -7,7 +7,7 @@ export const userCreate = async (body: IUser) => {
 
   const options = {
     auth: {
-      username: 'sk_test_R9JDz0ncXIRePyqg',
+      username: process.env.PAGARME_APY_KEY ?? '',
       password: ''
     }
   }
