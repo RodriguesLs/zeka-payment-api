@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "yarn tsc",
-    "dev": "node --loader ts-node/esm ./src/index.ts"
+    "dev": "node --loader ts-node/esm ./src/index.ts",
+    "start": "node dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
