@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "build": "yarn tsc",
     "dev": "node --loader ts-node/esm ./src/index.ts"
   },
   "devDependencies": {
