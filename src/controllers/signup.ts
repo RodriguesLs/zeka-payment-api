@@ -29,6 +29,8 @@ export const userCreate = async (body: IUser) => {
     return response;
   } catch (err) {
     console.log({ err });
+
+    throw new Error(`Erro no pagamento, tente novamente. Error: ${JSON.stringify(err)}`);
   }
 };
 
