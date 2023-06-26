@@ -8,7 +8,7 @@ export const userCreate = async (body: IUser) => {
 
   const options = {
     auth: {
-      username: process.env.PAGARME_APY_KEY ?? 'sk_test_R9JDz0ncXIRePyqg',
+      username: process.env.PAGARME_API_KEY ?? 'sk_test_R9JDz0ncXIRePyqg',
       password: ''
     }
   }
@@ -16,11 +16,12 @@ export const userCreate = async (body: IUser) => {
   try {
     const response: any = await pagarme.post('/', pagarmePayload, options);
 
-    if (response.status != 200) {
-      console.log(response.errors);
+    
+    // if (response.status != 200) {
+    //   console.log(response.errors);
 
-      throw new Error(`Erro no pagamento, tente novamente. Error: ${JSON.stringify(response.errors)}`);
-    }
+    //   throw new Error(`Erro no pagamento, tente novamente. Error: ${JSON.stringify(response.errors)}`);
+    // }
 
     // const zekaResponse = await zekaApi.post('/signup', body);
 
