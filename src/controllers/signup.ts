@@ -1,4 +1,5 @@
-import instance from '../api/pagarme.js';
+import pagarme from '../api/pagarme.js';
+import zekaApi from '../api/zekaApi.js';
 import { IPagarmeUser } from '../interfaces/user_pagarme.js';
 import { IUser } from '../interfaces/user.js';
 
@@ -13,9 +14,17 @@ export const userCreate = async (body: IUser) => {
   }
 
   try {
-    const response = await instance.post('/', pagarmePayload, options);
+    const response: any = await pagarme.post('/', pagarmePayload, options);
 
-    return response;
+    if (response.status != 200) {
+      console.log(response.errors);
+
+      throw new Error(`Erro no pagamento, tente novamente. Error: ${JSON.stringify(response.errors)}`);
+    }
+
+    const zekaResponse = await zekaApi.post('/signup', body);
+
+    return zekaResponse;
   } catch (err) {
     console.log({ err });
   }
