@@ -8,7 +8,7 @@ export const userCreate = async (body: IUser) => {
 
   const options = {
     auth: {
-      username: process.env.PAGARME_APY_KEY ?? '',
+      username: process.env.PAGARME_APY_KEY ?? 'sk_test_R9JDz0ncXIRePyqg',
       password: ''
     }
   }
@@ -22,9 +22,10 @@ export const userCreate = async (body: IUser) => {
       throw new Error(`Erro no pagamento, tente novamente. Error: ${JSON.stringify(response.errors)}`);
     }
 
-    const zekaResponse = await zekaApi.post('/signup', body);
+    // const zekaResponse = await zekaApi.post('/signup', body);
 
-    return zekaResponse;
+    // return zekaResponse;
+    return response;
   } catch (err) {
     console.log({ err });
   }
