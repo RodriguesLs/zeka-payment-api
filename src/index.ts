@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { userCreate } from './controllers/signup.js';
+import 'dotenv/config'
 
 const PORT = process.env.PORT || 8080;
 const server = express();

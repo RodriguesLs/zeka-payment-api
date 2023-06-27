@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://api.pagar.me/core/v5/orders',
+  baseURL: process.env.PAGARME_API_URL,
   headers: {
     'Content-Type': 'application/json'
   }
