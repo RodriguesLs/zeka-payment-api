@@ -22,13 +22,13 @@ export const userCreate = async (body: IUser) => {
       code: response?.data?.code
     }
 
-    const zekaResponse = await zekaApi.post('/signup', { customer: { ...body, pagarme_payload }});
+    const zekaResponse = await zekaApi.post('/signup', { customer: body, pagarme_payload });
 
     return zekaResponse;
   } catch (err: any) {
     console.log({ err });
 
-    return { status: err?.response?.status, data: err?.response?.data?.errors };
+    return { status: err?.response?.status, data: err?.response?.data?.errors || err?.response?.data };
   }
 };
 
