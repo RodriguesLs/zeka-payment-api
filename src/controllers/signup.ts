@@ -38,7 +38,7 @@ const paymentBody = ({
   email,
   areaCode,
   phoneNumber,
-  cardNumber,
+  number,
   cvv,
   holderName: holder_name,
   month: exp_month,
@@ -86,7 +86,7 @@ const paymentBody = ({
           "installments": 1,
           "statement_descriptor": "AVENGERS",
           "card": {
-            number: cardNumber.split(' ').join(''),
+            number: number.split(' ').join(''),
             holder_name,
             exp_month,
             exp_year,
