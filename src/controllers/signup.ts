@@ -36,13 +36,13 @@ const paymentBody = ({
   code,
   name,
   email,
-  areaCode: area_code,
-  phoneNumber: number,
+  areaCode,
+  phoneNumber,
   cardNumber,
   cvv,
   holderName: holder_name,
-  expMonth: exp_month,
-  expYear: exp_year
+  month: exp_month,
+  year: exp_year
 }: IPagarmeUser | any) => (
   {
     closed: true,
@@ -71,8 +71,8 @@ const paymentBody = ({
       "phones": {
         "mobile_phone": {
           "country_code": "55",
-          area_code,
-          number
+          area_code: areaCode.split('').map((n: any) => parseInt(n) ? parseInt(n) : '').join(''),
+          number: phoneNumber.split('').map((n: any) => parseInt(n) ? parseInt(n) : '').join('')
         }
       },
       "metadata": {
@@ -86,7 +86,7 @@ const paymentBody = ({
           "installments": 1,
           "statement_descriptor": "AVENGERS",
           "card": {
-            number: cardNumber,
+            number: cardNumber.replaceAll(' ', ''),
             holder_name,
             exp_month,
             exp_year,
