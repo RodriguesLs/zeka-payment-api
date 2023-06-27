@@ -3,8 +3,8 @@ import zekaApi from '../api/zekaApi.js';
 import { IPagarmeUser } from '../interfaces/user_pagarme.js';
 import { IUser } from '../interfaces/user.js';
 
-export const userCreate = async (body: IUser) => {
-  const pagarmePayload = paymentBody(body)
+export const userCreate = async (body: IUser | any) => {
+  const pagarmePayload = paymentBody(body.customer);
 
   const options = {
     auth: {
