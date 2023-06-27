@@ -86,7 +86,7 @@ const paymentBody = ({
           "installments": 1,
           "statement_descriptor": "AVENGERS",
           "card": {
-            number: cardNumber.replaceAll(' ', ''),
+            number: cardNumber.split(' ').join(''),
             holder_name,
             exp_month,
             exp_year,
