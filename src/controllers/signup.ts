@@ -22,7 +22,7 @@ export const userCreate = async (body: IUser | any) => {
       code: response?.data?.code
     }
 
-    const zekaResponse = await zekaApi.post('/signup', { customer: body, pagarme_payload });
+    const zekaResponse = await zekaApi.post('/signup', { ...body, pagarme_payload });
 
     return zekaResponse;
   } catch (err: any) {
