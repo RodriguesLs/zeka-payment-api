@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { userCreate } from './controllers/signup.js';
+import { userCreate, verifyPayment } from './controllers/signup.js';
 import 'dotenv/config'
 import cors from 'cors';
 
@@ -23,6 +23,13 @@ server.use((req, res, next) => {
 server.use(express.json());
 
 server.get('/', (req, res) => res.send('Server running successful'));
+
+server.get('/user/:user_id/verify_payment/:payment_id', async (req: Request, res: Response) => {
+  const { user_id, payment_id } = req.params;
+  const response = await verifyPayment(payment_id, user_id);
+
+  res.status(response.status).json(response.data);
+});
 
 server.post('/user', async (req: Request, res: Response) => {
   const response: any = await userCreate(req.body);

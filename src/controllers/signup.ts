@@ -32,6 +32,33 @@ export const userCreate = async (body: IUser | any) => {
   }
 };
 
+export const verifyPayment = async (paymentId: string, userId: string) => {
+  const options = {
+    auth: {
+      username: process.env.PAGARME_API_KEY ?? '',
+      password: ''
+    }
+  }
+
+  try {
+    const response: any = await pagarme.get(`/${paymentId}`, options);
+
+    const convertResponse: any = {
+      'failed': 'inactive',
+      'paid': 'active'
+    }
+
+    const status = convertResponse[response?.data?.status] || 'no_confirmed'; 
+    const zekaResponse = await zekaApi.put(`/students/${userId}`, { student: { status } });
+
+    return zekaResponse;
+  } catch (err: any) {
+    console.log({ err });
+
+    return { status: err?.response?.status, data: err?.response?.data?.errors || err?.response?.data };
+  }
+}
+
 const paymentBody = ({
   code,
   name,
