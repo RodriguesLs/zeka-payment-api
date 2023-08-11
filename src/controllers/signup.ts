@@ -4,7 +4,10 @@ import { IPagarmeUser } from '../interfaces/user_pagarme.js';
 import { IUser } from '../interfaces/user.js';
 
 export const userCreate = async (body: IUser | any) => {
-  const pagarmePayload = paymentBody(body.customer);
+  const { installments } = body.customer;
+  const REAL_AMOUNT = 18900;
+  const amount = (installments > 1) ? (REAL_AMOUNT / installments) : 17400;
+  const pagarmePayload = paymentBody({ ...body.customer, amount });
 
   const options = {
     auth: {
@@ -69,13 +72,15 @@ const paymentBody = ({
   cvv,
   holderName: holder_name,
   month: exp_month,
-  year: exp_year
+  year: exp_year,
+  installments,
+  amount
 }: IPagarmeUser | any) => (
   {
     closed: true,
     items: [
       {
-        amount: 390,
+        amount,
         description: "Acesso a plataforma Zeka",
         quantity: 1,
         code
@@ -110,7 +115,7 @@ const paymentBody = ({
       {
         "payment_method": "credit_card",
         "credit_card": {
-          "installments": 1,
+          installments,
           "statement_descriptor": "AVENGERS",
           "card": {
             number: number.split(' ').join(''),
