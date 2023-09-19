@@ -104,8 +104,8 @@ const paymentBody = ({
       "phones": {
         "mobile_phone": {
           "country_code": "55",
-          area_code: areaCode.split('').map((n: any) => parseInt(n) ? parseInt(n) : '').join(''),
-          number: phoneNumber.split('').map((n: any) => parseInt(n) ? parseInt(n) : '').join('')
+          area_code: areaCode?.split('')?.map((n: any) => parseInt(n) ? parseInt(n) : '')?.join('') || '13',
+          number: phoneNumber?.split('')?.map((n: any) => parseInt(n) ? parseInt(n) : '')?.join('') || '999732255'
         }
       },
       "metadata": {
