@@ -6,7 +6,7 @@ import { IUser } from '../interfaces/user.js';
 export const userCreate = async (body: IUser | any) => {
   const { installments, code: oldCode } = body.customer;
   const REAL_AMOUNT = 18900;
-  const amount = (installments > 1) ? (REAL_AMOUNT / installments) : 17400;
+  const amount = 390 // (installments > 1) ? (REAL_AMOUNT / installments) : 17400;
   const code = oldCode ? oldCode : '123456';
   const pagarmePayload = paymentBody({ ...body.customer, amount, code });
 
